@@ -1,0 +1,27 @@
+[tool.poetry]
+version = "1"
+name = "bughunt"
+description = ""
+readme = "README.md"
+authors = []
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+metaflow = "2.11.4"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: marks tests as integrations (deselect with '-m \"not integration\"')",
+    "serial",
+]
+pythonpath = "."
+addopts = "--ignore=src/metrics/flows --ignore-glob=metaflow.s3.*"
+# Don't look in non test folders for tests, this stops pytest finding the test_site_ingest
+norecursedirs = ".git src docker data metaflow.s3.*"
